@@ -7,6 +7,11 @@ resource "aws_route_table" "my_vpc_route_table" {
     gateway_id = aws_internet_gateway.my_vpc_gw.id
   }
 
+  route {
+    cidr_block                = [var.peer_vpc_cidr]
+    vpc_peering_connection_id = aws_vpc_peering_connection.my_vpc_peering.id
+  }
+
   tags = {
     Name = "my_vpc_rt"
   }

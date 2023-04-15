@@ -27,6 +27,13 @@ resource "aws_security_group" "public_instance_sg" {
     description = "Allow only public SSH access"
   }
 
+  ingress {
+    cidr_blocks = [var.peer_vpc_cidr]
+    from_port   = 8
+    to_port     = 8
+    protocol    = "icmp"
+  }
+
   egress {
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow all outgoing public communication"
